@@ -1,0 +1,85 @@
+* {
+    all: unset; //Unsets everything so you can style everything from scratch
+    font-family: Torus;
+    font-weight: Bold;
+}
+
+//Global Styles
+.bar {
+    color: #ECEFF4;
+    // padding: 10px;
+    // padding-bottom: 30px;
+
+    margin: 10px;
+}
+
+.left {
+    border-radius: 15px;
+    background-color: rgb(38, 39, 46);
+
+    padding: 5px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
+}
+
+.menuButton {
+    // background-color: #BF616A;
+    padding: 10px;
+    border-radius: 10px;
+    transition: ease-in-out 100ms;
+    margin-right: 5px;
+    // box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
+}
+
+.menuButton:hover {
+    background-color: rgba(76, 86, 106, 0.5);
+}
+
+.taskbar {
+    // background-color: #2E3440;
+    // padding: 0 5px;
+    // border-radius: 40px;
+    // box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
+}
+
+.win {
+    // background-color: #2E3440;
+    padding: 10px;
+    transition: ease-in-out 100ms;
+    border-radius: 10px;
+
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%;
+}
+
+.win:hover {
+    // text-shadow: 0 0 2px rgb(236, 239, 244, .7);
+    // background-color: #4C566A;
+    background-color: rgba(76, 86, 106, 0.5);
+}
+
+.win.active {
+    background-color: rgba(76, 86, 106, 0.5);
+}
+
+.right {
+    // background-color: #3b4252;
+    background-color: rgb(38, 39, 46);
+    border-radius: 15px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
+}
+
+.timedate {
+    padding: 0 20px;
+}
+
+.date {
+    font-size: 10px;
+    font-weight: normal;
+}
+
+.time {
+    font-size: 13px;
+    color: #EBCB8B;
+}
