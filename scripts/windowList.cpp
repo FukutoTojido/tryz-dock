@@ -20,7 +20,7 @@ using json = nlohmann::json;
 
 #define NIL (0)
 
-vector<string> excluded = {"polydock", "polybar", "rofi", "spacefm", "eww-bar", "eww-taskbar"};
+vector<string> excluded = {"polydock", "polybar", "rofi", "spacefm", "eww-bar", "eww-taskbar", "panel"};
 
 string exec(const char *cmd)
 {

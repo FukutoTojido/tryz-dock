@@ -1,0 +1,16 @@
+calendar {
+    color: #eceff4;
+    padding: 10px;
+}
+
+calendar.highlight {
+    color: #eceff4;
+}
+
+calendar:indeterminate {
+    color: rgba(236, 239, 244, 0.336);
+}
+
+calendar:selected {
+    color:  rgb(248, 149, 170);
+}

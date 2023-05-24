@@ -1,18 +1,29 @@
+(include	"./modules/calendar.yuck")
+
+(defvar 	onHoverName 		"")
+(defvar		calendarIsOpen		false)
 (deflisten 	allWin 
 	:initial 	`[]`
 	`./scripts/windowList`)
 (deflisten 	activeWindow	
 	:initial 	`0x0000000`
 	`./scripts/activeWindow`)
-(defvar 	onHoverName "")
 (defpoll 	wifiName
 	:interval 	"1s"
 	`iwgetid -r`
 )
 (defpoll	volume
-	:interval	"200ms"
+	:interval	"100ms"
 	:initial	0
 	`awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master) | grep -Po --line-buffered '[0-9]*'`)
+(defpoll	muted
+	:interval	"100ms"
+	:initial	"no"
+	`pactl get-sink-mute @DEFAULT_SINK@ | grep -Po "(?<=(^Mute: )).*"`)
+(defpoll	wallpaperPath
+	:interval	"5s"
+	:initial	""
+	`cat $HOME/.config/spacefm/session | grep -Po "(?<=(^wallpaper=)).*"`)
 
 (defwidget bar []
 	(centerbox 	
@@ -20,6 +31,9 @@
 		:vexpand		false
 		:valign			"start"
 		:class			"bar"
+		:style			`
+			background-image:	url("${wallpaperPath}")
+		`
 		(left)
 		(middle)
 	  	(right)))
@@ -30,17 +44,35 @@
 		:orientation	"h"
 		:halign			"start"
 		:space-evenly	false
+		(power)
 		(menu)
 		(taskbar)
 		(hoverName)
 		))
-	
-(defwidget menu []
+
+(defwidget	power	[]
 	(eventbox
-		:onhover		`eww update onHoverName="Start"`
+		:onhover		`eww update onHoverName="Power Menu"`
 		:onhoverlost	`eww update onHoverName=""`
 		(button
 			:class			"menuButton"
+			:onclick		`$HOME/.config/rofi/powermenu/type-2/powermenu.sh`
+			(box
+				:width		25
+				:height		25
+				:style		`
+					color: #f26d7f;
+				`
+				"")
+			)))
+	
+(defwidget menu []
+	(eventbox
+		:onhover		`eww update onHoverName="Launcher"`
+		:onhoverlost	`eww update onHoverName=""`
+		(button
+			:class			"menuButton"
+			:onclick		`$HOME/.config/rofi/launchers/type-1/launcher.sh`
 			(image
 				:path				"/home/try-z/.config/eww/icons/osu.png"
 				:image-width		25
@@ -54,7 +86,9 @@
 		:style 				`
 			padding: ${onHoverName != "" ? "10px" : "0px"};
 		`
-		{onHoverName}))
+		(label
+			:text			{onHoverName}
+			:limit-width	100)))
 
 (defwidget taskbar []
 	(box
@@ -143,6 +177,7 @@
 		:spacing		4
 		:space-evenly 	false 
 		:valign			"center"
+		:width			100
 		:style			`
 			padding: 0 15px;
 		`
@@ -174,6 +209,7 @@
 (defwidget wifi []
 	(button
 		:class			`wifi`
+		:onclick		`networkmanager_dmenu`
 		(box
 			:space-evenly 	false
 			:spacing		20
@@ -185,20 +221,23 @@
 			`${wifiName}`)))
 
 (defwidget audio []
-	(box
-		:space-evenly 	false
-		:spacing		20
+	(button
 		:class			`wifi`
-		:style		`
-			color: #ebcb8b;
-		`
-		(label
-			:text		{volume > 0 ? '' : ''})
-		`${volume}%`))
+		:onclick		{muted == "no" ? `amixer set Master mute` : `amixer set Master unmute` }
+		(box
+			:space-evenly 	false
+			:spacing		20
+			:style		`
+				color: #ebcb8b;
+			`
+			(label
+				:text		{volume <= 0 || muted == "yes" ? '' : ''})
+			{muted == "yes" ? "Muted" : `${volume}%`})))
   
 (defwidget timedate []
 	(button
-		:class 			"timedate" 
+		:class 			"timedate"
+		:onclick		`./scripts/toggleCalendar.sh`
 		(box 
 			:orientation 	"v" 
 			:space-evenly 	false 
@@ -235,8 +274,8 @@
 	:windowtype "dock"
 	:geometry (geometry :x "0px"
 						:y "0px"
-						:width "100%"
+						:width "93%"
 						; :height "70px"
-						:anchor "top center")
-	:reserve (struts :side "top" :distance "75px")
+						:anchor "top left")
+	:reserve (struts :side "top" :distance "80px")
 	(bar))
