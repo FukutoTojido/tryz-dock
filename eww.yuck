@@ -61,7 +61,9 @@
 				:width		25
 				:height		25
 				:style		`
+					font-family: Caskaydia Cove NF Mono;
 					color: #f26d7f;
+					font-size: 24px;
 				`
 				"")
 			)))
@@ -87,8 +89,8 @@
 			padding: ${onHoverName != "" ? "10px" : "0px"};
 		`
 		(label
-			:text			{onHoverName}
-			:limit-width	100)))
+			:text			{replace(onHoverName, "\\\\", "")}
+			:limit-width	70)))
 
 (defwidget taskbar []
 	(box
@@ -98,7 +100,7 @@
 		:spacing		5
 		(for win in allWin
 			(eventbox
-				:onhover 		`eww update onHoverName="${win.name}"`
+				:onhover 		`./scripts/getWindowName.sh ${win.window}`
 				:onhoverlost	`eww update onHoverName=""`
 				(button
 					:onclick `
