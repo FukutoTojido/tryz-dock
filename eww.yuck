@@ -1,3 +1,19 @@
+(deflisten 	allWin 
+	:initial 	`[]`
+	`./scripts/windowList`)
+(deflisten 	activeWindow	
+	:initial 	`0x0000000`
+	`./scripts/activeWindow`)
+(defvar 	onHoverName "")
+(defpoll 	wifiName
+	:interval 	"1s"
+	`iwgetid -r`
+)
+(defpoll	volume
+	:interval	"200ms"
+	:initial	0
+	`awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master) | grep -Po --line-buffered '[0-9]*'`)
+
 (defwidget bar []
 	(centerbox 	
 		:orientation 	"h"
@@ -18,7 +34,7 @@
 		(taskbar)
 		(hoverName)
 		))
-
+	
 (defwidget menu []
 	(eventbox
 		:onhover		`eww update onHoverName="Start"`
@@ -30,15 +46,6 @@
 				:image-width		25
 				:image-height		25))))
 
-
-(deflisten allWin :initial `[]`
-		`./scripts/windowList`)
-	
-(deflisten activeWindow	:initial `0x0000000`
-		`./scripts/activeWindow`)
-
-(defvar onHoverName "")
-
 (defwidget hoverName []
 	(revealer
 		:transition			"slideright"
@@ -48,13 +55,6 @@
 			padding: ${onHoverName != "" ? "10px" : "0px"};
 		`
 		{onHoverName}))
-
-(defwidget middle []
-	(box
-		:style `
-			opacity: 0
-		`
-		activeWindow))
 
 (defwidget taskbar []
 	(box
@@ -84,23 +84,128 @@
 							:image-width		25
 							:image-height		25)))))))
 
+(defwidget middle []
+		(box
+			:visible	false
+			activeWindow))
+
 (defwidget right []
 	(box
 		:class			"right"
 		:orientation	"h"
 		:space-evenly	false
 		:halign			"end"
+		:valign			"center"
+		:spacing		10
+		(sysinfo)
 		(timedate)))
+
+(defwidget sysinfo []
+	(box
+		:class			"sysinfo"
+		:spacing		5
+		:space-evenly	false
+		(audio)
+		(wifi)
+		(cpuram)
+		(battery))
+	)
+
+(defwidget battery []
+	(circular-progress
+		:class 		{EWW_BATTERY["BAT0"].capacity >= 80 ? 
+						"bat-great" 
+						: EWW_BATTERY["BAT0"].capacity >= 50 
+							? "bat-good" 
+							: EWW_BATTERY["BAT0"].capacity >= 30 
+								? "bat-mid" 
+								: "bat-low" }
+		:width 		30
+		:height 	30
+		:thickness	3
+		:value 		{EWW_BATTERY["BAT0"].capacity}
+		:start-at	75
+		:clockwise	true
+		:style		`
+			font-size: 10px;
+		`
+		:valign		"center"
+		(box
+			:style `
+				color: white;
+			`
+			{EWW_BATTERY["BAT0"].capacity}
+		)))
+
+(defwidget cpuram []
+	(box
+		:orientation	"v"
+		:spacing		4
+		:space-evenly 	false 
+		:valign			"center"
+		:style			`
+			padding: 0 15px;
+		`
+		(ram)
+		(cpu)))
+
+(defwidget cpu []
+	(box
+		:space-evenly	false
+		:spacing		10
+		:style			`font-size: 12px; color: #f595a5;`
+		(label
+			:class	"nerdFont"
+			:valign "center"
+			:text	``)
+		`${round(EWW_CPU.avg, 0)}%`))
+
+(defwidget ram []
+	(box
+		:space-evenly	false
+		:spacing		10
+		:style			`font-size: 12px; color: #a1d6ed;`
+		(label
+			:class	"nerdFont"
+			:valign "center"
+			:text	``)
+		`${round(EWW_RAM.used_mem / 1024 / 1024, 0)} MiB`))
+
+(defwidget wifi []
+	(button
+		:class			`wifi`
+		(box
+			:space-evenly 	false
+			:spacing		20
+			:style		`
+				color: #a9e8c8;
+			`
+			(label
+				:text		``)
+			`${wifiName}`)))
+
+(defwidget audio []
+	(box
+		:space-evenly 	false
+		:spacing		20
+		:class			`wifi`
+		:style		`
+			color: #ebcb8b;
+		`
+		(label
+			:text		{volume > 0 ? '' : ''})
+		`${volume}%`))
   
 (defwidget timedate []
-	(box 
+	(button
 		:class 			"timedate" 
-		:orientation 	"v" 
-		:space-evenly 	false 
-		:halign 		"end"
-		:valign			"center"
-	  	(time)
-		(date))
+		(box 
+			:orientation 	"v" 
+			:space-evenly 	false 
+			:halign 		"end"
+			:valign			"center"
+			(time)
+			(date)))
 )
 
 (defwidget time []
@@ -123,7 +228,7 @@
 
 (defpoll date
 	:interval "1s"
-	"date '+%B %_d, %Y'")
+	"date '+%a, %_d %B %Y'")
   
 (defwindow bar
 	:monitor 0

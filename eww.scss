@@ -1,12 +1,12 @@
 * {
     all: unset; //Unsets everything so you can style everything from scratch
-    font-family: Torus;
     font-weight: Bold;
+    transition: ease-in-out 100ms;
 }
 
 //Global Styles
 .bar {
-    color: #ECEFF4;
+    color: #eceff4;
     // padding: 10px;
     // padding-bottom: 30px;
 
@@ -18,7 +18,9 @@
     background-color: rgb(38, 39, 46);
 
     padding: 5px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+    font-family: Torus;
 }
 
 .menuButton {
@@ -32,13 +34,6 @@
 
 .menuButton:hover {
     background-color: rgba(76, 86, 106, 0.5);
-}
-
-.taskbar {
-    // background-color: #2E3440;
-    // padding: 0 5px;
-    // border-radius: 40px;
-    // box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
 }
 
 .win {
@@ -64,22 +59,61 @@
 }
 
 .right {
-    // background-color: #3b4252;
-    background-color: rgb(38, 39, 46);
     border-radius: 15px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
+    background-color: rgb(38, 39, 46);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+    font-family: Torus;
+
+    padding: 5px 5px;
 }
 
 .timedate {
-    padding: 0 20px;
+    // background-color: rgb(50, 51, 61);
+    border-radius: 15px;
+    padding: 10px 15px;
+}
+
+.timedate:hover {
+    background-color: rgba(76, 86, 106, 0.5);
 }
 
 .date {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: normal;
 }
 
 .time {
-    font-size: 13px;
-    color: #EBCB8B;
+    font-size: 14px;
+    color: #ebcb8b;
+}
+
+.nerdFont {
+    font-family:  CaskaydiaCove NF;
+    font-size: 12px;
+}
+
+.bat-great {
+    color: #88d6f2;
+}
+
+.bat-good {
+    color: #03fc8c;
+}
+
+.bat-mid {
+    color: #edc877;
+}
+
+.bat-low {
+    color: #f0356d;
+}
+
+.wifi {
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.wifi:hover {
+    background-color: rgba(76, 86, 106, 0.5);
 }
