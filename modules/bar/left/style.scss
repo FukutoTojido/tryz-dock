@@ -1,0 +1,34 @@
+.bar {
+    color: #cdd6f4;
+    background-color: #11111b;
+    padding: 5px 20px;
+}
+
+.windowTitle {
+    font-size: 16px;
+}
+
+.applicationName {
+    font-weight: normal;
+}
+
+.menu {
+    padding: 5px;
+}
+
+.cpu {
+    padding: 5px 10px 5px 5px;
+    background-color: #1e1e2e;
+    border-radius: 15px;
+}
+
+.np {
+    padding: 5px 10px 5px 5px;
+    background-color: #1e1e2e;
+    border-radius: 15px;
+}
+
+.np:hover {
+    background-color: #45475a;
+}
+

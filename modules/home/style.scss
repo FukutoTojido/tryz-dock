@@ -1,0 +1,60 @@
+$textShadowBlur: 0px;
+$textShadowDistance: 4px;
+
+.timeWidget {
+    padding: 10px;
+    background-position: -60px calc(100% + 60px);
+    font-family: Torus;
+
+    // margin: 10px;
+    // background-color: rgba(38, 39, 46, 1);
+    // border-radius: 50px;
+}
+
+.homeTime {
+    font-weight: 900;
+}
+
+.hour {
+    font-size: 128px;
+    // color: #d69773;
+    text-shadow: $textShadowDistance $textShadowDistance $textShadowBlur rgb(218, 139, 86);
+}
+
+.minute {
+    font-size: 90px;
+    // color: #73d699;
+    text-shadow: $textShadowDistance $textShadowDistance $textShadowBlur rgb(145, 194, 223);
+    margin-bottom: 10px;
+}
+
+.homeDate {
+    font-weight: 700;
+    font-size: 64px;
+    color: #f3e9a8;
+    text-shadow: $textShadowDistance $textShadowDistance $textShadowBlur rgb(219, 173, 105);
+}
+
+.user {
+    padding: 10px;
+    background-position: calc(100% + 60px) -60px;
+    font-family: Torus;
+}
+
+.icon {
+    background-image: url("/home/try-z/.face");
+    background-size: cover;
+    border-radius: 50px;
+}
+
+.welcome {
+    font-style: italic;
+    text-shadow: 1px 1px 0 rgb(91, 149, 197);
+}
+
+.name {
+    font-size: 48px;
+
+    color: #f3b1a8;
+    text-shadow: $textShadowDistance $textShadowDistance $textShadowBlur rgb(141, 85, 104);
+}

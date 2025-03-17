@@ -1,0 +1,26 @@
+(defwidget ram []
+    (box
+      :space-evenly	false
+      :spacing		10
+      :class          "cpu"
+      :height     40
+      (circular-progress
+        :class 		"bat"
+        :width 		25
+        :height 	25
+        :thickness	2
+        :value 		{EWW_RAM.used_mem_perc}
+        :start-at	75
+        :clockwise	true
+        :style		`
+        font-size: 10px;
+        `
+        :valign		"center"
+        (box
+          :style `font-size: 14px`
+          " "
+        )
+      )
+      `${round(EWW_RAM.used_mem_perc, 0)}%`
+    )
+  )

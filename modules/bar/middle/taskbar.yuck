@@ -1,0 +1,30 @@
+(defwidget taskbar []
+  (box
+    :class			"taskbar"
+    :halign			"start"
+    :space-evenly	false
+    :spacing		5
+    :height     40
+    :vexpand		false
+    (for win in allWin
+      (eventbox
+        :tooltip	"${win.name}"
+        (button
+          :onclick `
+          /home/try-z/.config/eww/scripts/toggleWindow.sh ${win.pid}
+          `
+          :class	{win.pid == activeName.xid ? "win active" : "win"}
+          :valign	"center"
+          :halign	"center"
+          (box
+            :space-evenly	false
+            (image
+              :path				"${win.icon}"
+              :image-width		20
+            :image-height		20)
+          ))))))
+
+(deflisten 	allWin
+  :initial 	`[]`
+  `/home/try-z/.config/eww/scripts/testWin.py`
+)

@@ -1,0 +1,39 @@
+.playing {
+    background-color: #11111b;
+    border-radius: 20px;
+    padding: 20px;
+
+    font-family: "CaskaydiaMono Nerd Font", "Meiryo UI";
+    border: solid 2px #cdd6f4;
+}
+
+.jacket {
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+}
+
+.artist {
+    font-size: 14px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.metadata {
+    padding: 10px;
+}
+
+.progress scale trough highlight {
+    background-color: #cdd6f4;
+    border-radius: 10px;
+}
+
+.progress scale trough {
+    background-color: #1e1e2e;
+    border-radius: 10px;
+    min-height: 5px;
+    min-width: 50px;
+}

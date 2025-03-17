@@ -1,0 +1,76 @@
+.right {
+    border-radius: 15px;
+    // background-color: #33395f;
+    // box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+    // font-family: Torus;
+}
+
+.timedate {
+    // background-color: rgb(50, 51, 61);
+    background-color: #1e1e2e;
+    border-radius: 15px;
+    padding: 10px 15px;
+}
+
+.timedate:hover {
+    // background-color: rgba(76, 86, 106, 0.8);
+    background-color: #45475a;
+}
+
+.date {
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+.time {
+    font-size: 14px;
+    color: #cdd6f4;
+}
+
+.nerdFont {
+    font-family: CaskaydiaCove NF;
+    font-size: 12px;
+}
+
+.batContainer {
+    padding: 5px 5px 5px 10px;
+    border-radius: 15px;
+    background-color: #1e1e2e;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.bat {
+    color: #cdd6f4;
+    font-size: 16px;
+}
+
+.wifi {
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.wifi:hover {
+    // background-color: rgba(76, 86, 106, 0.8);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tray {
+    padding: 5px;
+}
+
+.tray menu {
+    padding: 10px;
+    background-color: rgba(38, 39, 46);
+
+    >menuitem {
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    >menuitem:hover {
+        background-color: rgba(76, 86, 106, 0.8);
+    }
+}

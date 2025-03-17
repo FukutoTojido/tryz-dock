@@ -1,0 +1,44 @@
+(defwidget timedate []
+  (button
+    :class 			"timedate"
+    :onclick		`./scripts/toggleCalendar.sh`
+    :valign         "center"
+    :height     40
+    
+    (box
+      :orientation 	"h"
+      :space-evenly 	false
+      :spacing 10
+      :halign 		"end"
+      :valign			"center"
+      (time)
+      "•"
+      (date)))
+)
+
+(defwidget time []
+  (box
+    :class		"time"
+    :halign		"end"
+    :space-evenly 	false
+  `${hour}:${minute}`))
+
+(defwidget date []
+  (box
+    :class		"date"
+    :halign		"end"
+    :space-evenly 	false
+  date))
+
+(defpoll hour
+  :interval "1s"
+  "date '+%H'"
+)
+(defpoll minute
+  :interval "1s"
+  "date '+%M'"
+)
+(defpoll date
+  :interval "1s"
+  "date '+%A, %_d/%m'"
+)

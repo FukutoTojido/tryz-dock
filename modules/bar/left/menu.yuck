@@ -1,0 +1,29 @@
+(defwidget menu []
+  (box
+    :orientation  "v"
+    :class    "menu"
+    :width		30
+    :height		30
+    :spacing  -5
+    (label
+      :halign "start"
+      :class  "applicationName"
+      :limit-width  40
+      :text {activeName.application}
+    )
+    (label
+      :halign "start"
+      :class  "windowTitle"
+      :limit-width  40
+      :text {activeName.name}
+    )
+  )
+)
+
+(deflisten 	activeName
+  :initial 	`{
+  "name": "",
+  "application": ""
+  }`
+  `/home/try-z/.config/eww/scripts/activeName.py`
+)

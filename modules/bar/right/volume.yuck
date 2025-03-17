@@ -1,0 +1,29 @@
+(defwidget volume []
+  (button
+    :onclick		{muted == "no" ? `amixer set Master mute` : `amixer set Master unmute` }
+    (box
+      :halign   "center"
+      :class    "wifi"
+      :spacing  10
+      :valign   "center"
+      (label
+        :text   { muted == "no" ? "󰋋" : "󰟎" }
+      )
+      (label
+        :text   { muted == "no" ? `${volume}` : "0"}
+        :style  `font-size: 14px`
+      )
+    ))
+)
+
+(defpoll	volume
+  :interval	"100ms"
+  :initial	0
+  `awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master) | grep -Po --line-buffered '[0-9]*'`
+)
+
+(defpoll	muted
+  :interval	"100ms"
+  :initial	"no"
+  `pactl get-sink-mute @DEFAULT_SINK@ | grep -Po "(?<=(^Mute: )).*"`
+)

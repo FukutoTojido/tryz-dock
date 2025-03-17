@@ -1,0 +1,24 @@
+(include    "./modules/bar/left/index.yuck")
+(include    "./modules/bar/middle/index.yuck")
+(include    "./modules/bar/right/index.yuck")
+
+(defwidget bar []
+  (centerbox
+    :orientation 	"h"
+    ; :vexpand		false
+    :valign			"center"
+    :class			"bar"
+    (left)
+    (middle)
+    (right)))
+
+(defwindow bar [monitor]
+  :monitor monitor
+  :windowtype "dock"
+  :geometry (geometry :x "0px"
+    :y "0px"
+    :width "1920px"
+    :height "60px"
+  :anchor "top left")
+  :reserve (struts :side "top" :distance "70px")
+  (bar))

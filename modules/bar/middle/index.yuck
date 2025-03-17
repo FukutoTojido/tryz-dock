@@ -1,0 +1,10 @@
+(include	"./modules/bar/middle/taskbar.yuck")
+
+(defwidget middle []
+  (box
+    :class			  "middle"
+    :orientation	"h"
+    :halign			  "start"
+    :valign			  "center"
+    (taskbar)
+  ))

@@ -1,0 +1,44 @@
+(include    "./modules/bar/right/battery.yuck")
+(include    "./modules/bar/right/internet.yuck")
+(include    "./modules/bar/right/power.yuck")
+(include    "./modules/bar/right/timedate.yuck")
+(include    "./modules/bar/right/volume.yuck")
+
+(defwidget right []
+  (box
+    :class			"right"
+    :orientation	"h"
+    :space-evenly	true
+    ; :halign			"end"
+    :valign			"center"
+    :hexpand        "true"
+    :spacing		10
+    (box
+      :space-evenly	false
+      :hexpand  true
+      :halign   "start"
+      :spacing  5
+      (timedate)
+      (battery)
+    )
+    (box
+      :space-evenly	false
+      :valign   "center"
+      :halign   "end"
+      :spacing  20
+      (systray
+        :class		  "tray"
+        :spacing	  20
+        :icon-size  16
+      )
+      "•"
+      (box
+        :space-evenly false
+        :spacing      5
+        (wifi)
+        (volume)
+      )
+      
+    )
+  )
+)

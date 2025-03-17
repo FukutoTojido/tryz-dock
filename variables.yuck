@@ -1,0 +1,4 @@
+(defpoll	wallpaperPath
+	:interval	"5s"
+	:initial	""
+	`cat $HOME/.config/spacefm/session | grep -Po "(?<=(^wallpaper=)).*"`)

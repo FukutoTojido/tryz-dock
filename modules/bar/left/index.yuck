@@ -1,0 +1,25 @@
+(include    "./modules/bar/left/menu.yuck")
+(include    "./modules/bar/left/cpu.yuck")
+(include    "./modules/bar/left/ram.yuck")
+(include    "./modules/bar/left/np.yuck")
+
+(defwidget left []
+  (box
+    :space-evenly true
+    :valign       "center"
+    (box
+      :halign "start"
+      :valign "center"
+      (menu)
+    )
+    (box
+      :halign   "end"
+      :valign   "center"
+      :spacing  5
+      :space-evenly false
+      (cpu)
+      (ram)
+      (np)
+    )
+  )
+)

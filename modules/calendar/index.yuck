@@ -1,0 +1,24 @@
+(defwidget calendarContainer []
+  (box
+    :orientation	"v"
+    :space-evenly	false
+    :style	`
+    background-color: #11111b;
+    padding: 10px;
+    border-radius: 15px;
+    `
+    (calendar
+    ))
+)
+
+(defwindow calendar [monitor]
+  :monitor monitor
+  :windowtype	"normal"
+  :geometry (geometry :x "-10px"
+    :y "70px"
+    :width 	"300px"
+  :anchor "top right")
+  :wm-ignore	true
+  (calendarContainer))
+
+(defvar		calendarIsOpen		false)

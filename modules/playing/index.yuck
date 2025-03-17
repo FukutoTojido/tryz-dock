@@ -1,0 +1,101 @@
+(defwidget playing []
+  (revealer
+    :reveal         open_audio
+    :transition     "slidedown"
+    :class          "playing"
+    (box
+      :vexpand        false
+      :space-evenly   false
+      :spacing        10
+      (box
+        :class            "jacket"
+        :height     150
+        :width      150
+        :style      `background-image: url('${jacket}');`
+      )
+      (box
+        :orientation    "v"
+        :space-evenly   false
+        :valign     "center"
+        :spacing  20
+        :class  "metadata"
+        (box
+          :width     300
+          :valign     "center"
+          :orientation    "v"
+          (label
+            :class  "artist"
+            :text   {artist}
+            :limit-width    30
+          )
+          (label
+            :class  "title"
+            :text   {title}
+            :limit-width    50
+          )
+        )
+        (box
+          :class      "progress"
+          :orientation "v"
+          :space-evenly false
+          :spacing    20
+          (scale
+            :min        0
+            :max        101
+            :orientation    "h"
+            :value      {playPercent}
+          )
+          (box
+            :halign "center"
+            :spacing  20
+            (button
+              :onclick `playerctl previous`
+              (box
+                :halign "center"
+                :style `font-size: 24px;`
+                "󰒮"
+              )
+            )
+            (button
+              :onclick `playerctl play-pause`
+              (box
+                :halign "center"
+                :style `font-size: 24px;`
+                {play_status != "Playing" ? "󰐊" : "󰏤"}
+              )
+            )
+            (button
+              :onclick `playerctl next`
+              (box
+                :halign "center"
+                :style `font-size: 24px;`
+                "󰒭"
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwindow playing [monitor]
+  :monitor monitor
+  :windowtype "dialog"
+  :wm-ignore  true
+  :geometry (
+    geometry
+    :x "0px"
+    :y "70px"
+    :anchor "top center"
+  )
+  (playing)
+)
+
+(defpoll jacket
+  :interval	"1s"
+  :initial    "/home/try-z/.face"
+  `./scripts/audio_art.sh`
+)
+
+(defvar open_audio false)

@@ -1,0 +1,27 @@
+(defwidget cpu []
+  (box
+    :space-evenly	false
+    :spacing		10
+    :class          "cpu"
+    :valign         "center"
+    :height     40
+    (circular-progress
+      :class 		"bat"
+      :width 		25
+      :height 	25
+      :thickness	2
+      :value 		{EWW_CPU.avg}
+      :start-at	75
+      :clockwise	true
+      :style		`
+      font-size: 10px;
+      `
+      :valign		"center"
+      (box
+        :style `font-size: 14px`
+        ""
+      )
+    )
+    `${round(EWW_CPU.avg, 0)}%`
+  )
+)

@@ -1,0 +1,28 @@
+(defwidget battery []
+  (box
+    :spacing  10
+    :class    "batContainer"
+    :valign   "center"
+    :height     40
+    (box
+      {`${EWW_BATTERY["BAT0"].capacity}%`}
+    )
+    (circular-progress
+      :class 		"bat"
+      :width 		25
+      :height 	25
+      :thickness	2
+      :value 		{EWW_BATTERY["BAT0"].capacity}
+      :start-at	75
+      :clockwise	true
+      :style		`
+      font-size: 10px;
+      `
+      :valign		"center"
+      (box
+        :style `font-size: 14px`
+        "󰁹"
+      )
+    )
+  )
+)

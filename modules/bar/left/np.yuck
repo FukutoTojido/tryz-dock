@@ -1,0 +1,58 @@
+(defwidget np []
+  (box
+    :space-evenly	false
+    :spacing		10
+    :class          "np"
+    :valign         "center"
+    :height     40
+    (button
+      :onclick `playerctl play-pause`
+      (circular-progress
+        :class 		"bat"
+        :width 		25
+        :height 	25
+        :thickness	2
+        :value 		{playPercent}
+        :start-at	75
+        :clockwise	true
+        :style		`
+        font-size: 10px;
+        `
+        :valign		"center"
+        (box
+          :halign "center"
+          :style `font-size: 14px;`
+          {play_status != "Playing" ? "󰐊" : "󰏤"}
+          
+        )
+      )
+    )
+    (button
+      :onclick  "./scripts/toggleAudio.sh"
+      (label
+        :text
+        `${artist} - ${title}`
+        :limit-width    40
+      )
+    )
+  )
+)
+
+(deflisten play_status
+  :initial    "Stopped"
+  `playerctl --follow status`
+)
+
+(deflisten artist :initial ""
+  `playerctl metadata --format "{{artist}}" --follow`
+)
+
+(deflisten title :initial ""
+  `playerctl metadata --format "{{title}}" --follow`
+)
+
+(defpoll	playPercent
+  :interval	"1s"
+  :initial	0
+  `/home/try-z/.config/eww/scripts/audioPos.sh`
+)

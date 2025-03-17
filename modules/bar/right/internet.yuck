@@ -1,0 +1,12 @@
+(defwidget wifi []
+  (button
+    :onclick		`networkmanager_dmenu &`
+    :halign     "center"
+    (box
+      :space-evenly 	false
+      :class			`wifi`
+      :spacing		20
+      :halign     "center"
+      (label
+      :text		`󰤢 `)
+    )))

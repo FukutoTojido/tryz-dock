@@ -1,0 +1,15 @@
+(defwidget	power	[]
+  (eventbox
+    (button
+      :class			"menuButton"
+      :onclick		`$HOME/.config/rofi/powermenu/type-2/powermenu.sh &`
+      (box
+        :width		30
+        :height		30
+        :style		`
+        font-family: Caskaydia Cove NF Mono;
+        color: #f26d7f;
+        font-size: 24px;
+        `
+      "")
+    )))
