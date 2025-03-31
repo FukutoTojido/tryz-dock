@@ -1,0 +1,29 @@
+(defwidget workspaces [monitor]
+  (box
+    :class			"taskbar"
+    :halign			"start"
+    :space-evenly	false
+    :spacing		5
+    :height     40
+    :vexpand		false
+    (button
+      :onclick `eww open workspaces_list --toggle --arg monitor=${monitor}`
+      :class	"win"
+      :valign	"center"
+      :halign	"center"
+      (box
+        :space-evenly	true
+        :width 20
+        :height 20
+        (label
+          :halign	"center"
+          :xalign 0.5
+          :justify "center"
+          :text    "${currentDesktop}"
+        )
+      ))))
+
+(deflisten 	currentDesktop
+  :initial 	`1`
+  `/home/try-z/.config/bspwm/bin/bspcurrentwin.sh`
+)

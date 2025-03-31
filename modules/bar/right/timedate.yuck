@@ -1,7 +1,7 @@
-(defwidget timedate []
+(defwidget timedate [monitor]
   (button
     :class 			"timedate"
-    :onclick		`./scripts/toggleCalendar.sh`
+    :onclick		`./scripts/toggleCalendar.sh ${monitor}`
     :valign         "center"
     :height     40
     

@@ -6,6 +6,16 @@
     // font-family: Torus;
 }
 
+.quick_settings_open {
+    padding: 2px 10px;
+    border-radius: 15px;
+}
+
+.quick_settings_open:hover {
+    background-color: #313244;
+
+}
+
 .timedate {
     // background-color: rgb(50, 51, 61);
     background-color: #1e1e2e;
@@ -38,7 +48,7 @@
     border-radius: 15px;
     background-color: #1e1e2e;
     font-size: 14px;
-    font-weight: bold;
+    // font-weight: bold;
 }
 
 .bat {

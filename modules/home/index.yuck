@@ -1,84 +1,89 @@
 (defwidget  home    []
-    (box
-        ))
+  (box
+  ))
 
 (defwindow  home
-    :monitor    0
-    :windowtype "dock"
-    :geometry   (geometry   :x      "0px"
-                            :y      "0px"
-                            :anchor "bottom left")
-    :wm-ignore  true
-    (home))
+  :monitor    0
+  :windowtype "dock"
+  :geometry   (geometry   :x      "0px"
+    :y      "0px"
+  :anchor "bottom left")
+  :wm-ignore  true
+  (home))
 
 (defwidget  user    []
+  (box
+    :class          "user"
+    :space-evenly   false
+    :spacing        50
+    :style          `
+    background-image: url("${wallpaperPath}");
+    `
     (box
-        :class          "user"
-        :space-evenly   false
-        :spacing        50
-        :style          `
-            background-image: url("${wallpaperPath}");
-        `
-        (box
-            :orientation    "v"
-            :space-evenly   "false"
-            :valign         "center"
-            :spacing        -15
-            (label
-                :halign     "end"
-                :class      "welcome"
-                :text       "welcome back")
-            (label
-                :halign     "end"
-                :class      "name"
-                :text       "try-z"))
-        (box
-            :class  "icon"
-            :width  100
-            :height 100)))
+      :orientation    "v"
+      :space-evenly   "false"
+      :valign         "center"
+      :spacing        -15
+      (label
+        :halign     "end"
+        :class      "welcome"
+      :text       "welcome back")
+      (label
+        :halign     "end"
+        :class      "name"
+      :text       "try-z"))
+    (box
+      :class  "icon"
+      :width  100
+    :height 100)))
 
 (defwindow  user
-    :monitor    0
-    :stacking   "bg"
-    :windowtype "dock"
-    :geometry   (geometry   :x      "-60px"
-                            :y      "60px"
-                            :anchor "top right")
-    :wm-ignore  false
-    (user))
+  :monitor    0
+  :stacking   "bg"
+  :windowtype "dock"
+  :geometry   (geometry   :x      "-60px"
+    :y      "60px"
+  :anchor "top right")
+  :wm-ignore  false
+  (user))
 
 (defwidget  timeWidget    []
+  (box
+    :class          "timeWidget"
+    :orientation    "v"
+    :space-evenly   "false"
+    :width 400
+    ; :style          `
+    ; background-image: url("${wallpaperPath}");
+    ; `
+    :spacing        10
+    (label
+      :halign "center"
+      :class  "homeDate"
+    :text   {date})
     (box
-        :class          "timeWidget"
-        :orientation    "v"
-        :space-evenly   "false"
-        :style          `
-            background-image: url("${wallpaperPath}");
-        `
-        :spacing        -20
-        (box
-            :halign         "start"
-            :class          "homeTime"
-            :space-evenly   false
-            :spacing        20
-            (label
-                :class  "hour"
-                :text   {hour})
-            (label
-                :class  "minute"
-                :valign "end"
-                :text   {minute}))
-        (label
-            :halign "start"
-            :class  "homeDate"
-            :text   {date})))
+      :halign         "center"
+      :class          "homeTime"
+      :space-evenly   false
+      :spacing        0
+      (label
+        :class  "hour"
+      :text   {hour})
+      (label
+        :class  "hour"
+      :text   ":")
+      (label
+        :class  "minute"
+        :valign "end"
+      :text   {minute}))
+  ))
 
 (defwindow  timeWidget
-    :monitor    0
-    :stacking   "bg"
-    :windowtype "dock"
-    :geometry   (geometry   :x      "60px"
-                            :y      "-60px"
-                            :anchor "bottom left")
-    :wm-ignore  false
-    (timeWidget))
+  :monitor    '["DP-0", "eDP-1-0", "eDP-1-1"]'
+  :stacking   "bg"
+  :windowtype "desktop"
+  :geometry   (geometry   :x      "120px"
+    :y      "-100px"
+  :anchor "center left")
+  :wm-ignore  false
+  (timeWidget))

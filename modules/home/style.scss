@@ -3,8 +3,8 @@ $textShadowDistance: 4px;
 
 .timeWidget {
     padding: 10px;
-    background-position: -60px calc(100% + 60px);
-    font-family: Torus;
+    background-position: -120px;
+    font-family: "SF Pro Rounded";
 
     // margin: 10px;
     // background-color: rgba(38, 39, 46, 1);
@@ -12,27 +12,24 @@ $textShadowDistance: 4px;
 }
 
 .homeTime {
-    font-weight: 900;
+    font-weight: 600;
+    font-family: "SF Pro - Stencil";
 }
 
 .hour {
     font-size: 128px;
-    // color: #d69773;
-    text-shadow: $textShadowDistance $textShadowDistance $textShadowBlur rgb(218, 139, 86);
+    color: #313244;
 }
 
 .minute {
-    font-size: 90px;
-    // color: #73d699;
-    text-shadow: $textShadowDistance $textShadowDistance $textShadowBlur rgb(145, 194, 223);
+    font-size: 128px;
+    color: #313244;
     margin-bottom: 10px;
 }
 
 .homeDate {
-    font-weight: 700;
-    font-size: 64px;
-    color: #f3e9a8;
-    text-shadow: $textShadowDistance $textShadowDistance $textShadowBlur rgb(219, 173, 105);
+    font-size: 25px;
+    color: #313244;
 }
 
 .user {

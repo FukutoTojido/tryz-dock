@@ -1,0 +1,46 @@
+(defwidget workspaces_list []
+  (box
+    :class			"taskbar"
+    :halign			"start"
+    :space-evenly	false
+    :spacing		5
+    :height     40
+    :vexpand		false
+    (for workspace in all_workspaces
+      (button
+        :onclick `
+        bspc desktop --focus ${workspace} && eww close workspaces_list
+        `
+        :class "win"
+        :valign	"center"
+        :halign	"center"
+        (box
+          :space-evenly	true
+          :width 20
+          :height 20
+          (label
+            :halign	"center"
+            :xalign 0.5
+            :justify "center"
+            :text            `${workspace}`
+          )
+        )
+      ))))
+
+(defwindow workspaces_list [monitor]
+  :monitor monitor
+  :windowtype "normal"
+  :wm-ignore  true
+  :geometry (
+    geometry
+    :x "0px"
+    :y "70px"
+    :anchor "top center"
+  )
+  (workspaces_list)
+)
+
+(deflisten all_workspaces
+  :initial `[]`
+  `echo $(bspc query -D --names) | jq -R -s -c 'split(" ")'`
+)

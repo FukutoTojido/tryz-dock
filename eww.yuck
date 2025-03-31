@@ -3,3 +3,7 @@
 (include	"./modules/home/index.yuck")
 (include	"./modules/bar/index.yuck")
 (include	"./modules/playing/index.yuck")
+(include	"./modules/flash_notif/index.yuck")
+(include	"./modules/panel/index.yuck")
+(include	"./modules/workspaces_list/index.yuck")
+(include	"./modules/window_switcher/index.yuck")

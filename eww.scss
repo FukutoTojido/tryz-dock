@@ -1,15 +1,20 @@
-@import "modules/calendar/style.scss";
-@import "modules/home/style.scss";
-@import "modules/playing/style.scss";
-@import "modules/bar/left/style.scss";
-@import "modules/bar/middle/style.scss";
-@import "modules/bar/right/style.scss";
-
 * {
     all: unset; //Unsets everything so you can style everything from scratch
     transition: ease-in-out 100ms;
-    color: #cdd6f4;
+
+    font-family: Rubik, Meiryo UI, "JetBrainsMono Nerd Font Propo";
 }
+
+@import "modules/calendar/style.scss";
+@import "modules/home/style.scss";
+@import "modules/playing/style.scss";
+@import "modules/panel/style.scss";
+@import "modules/flash_notif/style.scss";
+@import "modules/bar/left/style.scss";
+@import "modules/bar/middle/style.scss";
+@import "modules/bar/right/style.scss";
+@import "modules/window_switcher/style.scss";
+
 
 tooltip.label {
     padding: 20px;

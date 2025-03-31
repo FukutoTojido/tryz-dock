@@ -1,0 +1,46 @@
+(defwidget window_switcher []
+  (box
+    :class "window_switcher"
+    :orientation "h"
+    :spacing 5
+    :space-evenly false
+    (for win in window_order
+      (button
+        :class "application ${win.pid == selected_pid ? 'selected' : '' }"
+        :onclick `eww close window_switcher && /home/try-z/.config/eww/scripts/toggleWindow.sh ${win.pid}`
+        (box
+          :width 100
+          :orientation "v"
+          :spacing 10
+          :space-evenly false
+          (image
+            :path `${win.icon}`
+            :image-width		40
+            :image-height		40
+          )
+          (label
+            :valign "center"
+            :limit-width 30
+            :text `${win.class}`
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwindow window_switcher []
+  :monitor 0
+  :windowtype "normal"
+  :wm-ignore  true
+  :geometry (
+    geometry
+    :x "0px"
+    :y "0px"
+    :anchor "center center"
+  )
+  (window_switcher)
+)
+
+(defvar index 0)
+(defvar selected_pid -1)

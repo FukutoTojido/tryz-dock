@@ -1,0 +1,123 @@
+(include  "./modules/panel/notifications.yuck")
+
+(defwidget panel []
+  (revealer
+    :transition "slidedown"
+    :reveal open_panel
+    (box
+      :orientation  "v"
+      :halign       "start"
+      :space-evenly false
+      :valign "start"
+      (box
+        :hexpand      true
+        :valign       "center"
+        :orientation "v"
+        :class  "quick"
+        :spacing 10
+        (box
+          (box
+            :halign       "start"
+            :hexpand      true
+            :orientation  "v"
+            (label
+              :halign "start"
+              :class  "quick_time"
+              :text   `${hour}:${minute}`
+            )
+            (label
+              :halign "start"
+              :class  "quick_date"
+              :text   `${date}`
+            )
+          )
+          (box
+            :halign   "end"
+            :valign       "center"
+            :spacing  5
+            (button
+              :class  "quick_button"
+              :width  40
+              :height 40
+              :onclick `XDG_CURRENT_DESKTOP="gnome" gnome-control-center & disown`
+              "󰒓"
+            )
+            (button
+              :class  "quick_button"
+              :onclick `betterlockscreen -l`
+              :width  40
+              :height 40
+              "󰌾"
+            )
+            (button
+              :class  "quick_button"
+              :onclick `reboot`
+              :width  40
+              :height 40
+              "󰜉"
+            )
+            (button
+              :class  "quick_button"
+              :onclick `shutdown now`
+              :width  40
+              :height 40
+              "󰐥"
+            )
+          )
+        )
+        (box
+          :valign "center"
+          :spacing 10
+          (button
+            :class  "quick_set"
+            :width  40
+            :height 40
+            :onclick "XDG_CURRENT_DESKTOP=\"gnome\" gnome-control-center wifi & disown"
+            (box
+              :space-evenly false
+              :spacing 20
+              "󰤥"
+              (label
+                :style "font-size: 14px;"
+                :text "Internet"
+              )
+            )
+          )
+          (button
+            :class  "quick_set"
+            :width  40
+            :height 40
+            :onclick "blueberry"
+            (box
+              :space-evenly false
+              :spacing 10
+              "󰂯"
+              (label
+                :style "font-size: 14px;"
+                :text "Bluetooth"
+              )
+            )
+            
+          )
+        )
+      )
+      (notifcations)
+    )
+  )
+)
+
+(defwindow panel [monitor]
+  :monitor monitor
+  :windowtype "dialog"
+  :wm-ignore  true
+  :geometry (
+    geometry
+    :x "-10px"
+    :y "70px"
+    :width    "400px"
+    :anchor "top right"
+  )
+  (panel)
+)
+
+(defvar open_panel false)

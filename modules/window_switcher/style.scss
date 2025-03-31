@@ -1,0 +1,18 @@
+.window_switcher {
+    padding: 20px;
+    border-radius: 20px;
+
+    background: #1e1e2e;
+}
+
+.application {
+    border-radius: 10px;
+    background: #181825;
+
+    border: solid 1px #7f849c;
+    padding: 10px;
+}
+
+.application:hover, .selected {
+    background-color: #313244;
+}

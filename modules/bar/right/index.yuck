@@ -4,7 +4,7 @@
 (include    "./modules/bar/right/timedate.yuck")
 (include    "./modules/bar/right/volume.yuck")
 
-(defwidget right []
+(defwidget right [monitor]
   (box
     :class			"right"
     :orientation	"h"
@@ -18,7 +18,9 @@
       :hexpand  true
       :halign   "start"
       :spacing  5
-      (timedate)
+      (timedate
+        :monitor monitor
+      )
       (battery)
     )
     (box
@@ -32,13 +34,16 @@
         :icon-size  16
       )
       "•"
-      (box
-        :space-evenly false
-        :spacing      5
-        (wifi)
-        (volume)
+      (button
+        :onclick `./scripts/togglePanel.sh ${monitor}`
+        :class "quick_settings_open"
+        (box
+          :space-evenly false
+          :spacing      5
+          (wifi)
+          (volume)
+        )
       )
-      
     )
   )
 )

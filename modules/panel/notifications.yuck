@@ -1,0 +1,115 @@
+(defwidget notif [notif]
+  (box
+    :class  "notif"
+    :space-evenly  false
+    :spacing 10
+    (button
+      :class "notif_content"
+      :hexpand true
+      :onclick { jq(notif.actions, "length") == 0 ? "astal-notifd -c ${notif.id}" : "astal-notifd -i ${notif.id}:${notif.actions[0].id}" }
+      (box
+        :orientation "v"
+        :space-evenly false
+        :spacing 10
+        (box
+          :spacing 10
+          (box
+            :space-evenly false
+            :spacing 10
+            :valign   "center"
+            (box
+              :width  20
+              :height  20
+              :class "notif_icon"
+              :style  "background-image: url('${notif.app_icon}')"
+            )
+            (box
+              :class "notif_name"
+              {notif.app_name}
+            )
+          )
+        )
+        (box
+          :orientation "v"
+          :space-evenly  false
+          (label
+            :halign "start"
+            :class "notif_summary"
+            :text   {notif.summary}
+            :wrap   true
+            :xalign 0
+            :justify    "left"
+          )
+          (label
+            :halign "start"
+            :class "notif_body"
+            :justify    "left"
+            :xalign 0
+            :wrap   true
+            :markup   {notif.body}
+          )
+        )
+      )
+    )
+    (box
+      :class "notif_close_col"
+      (button
+        :class "notif_close"
+        :valign   "start"
+        :halign "end"
+        :onclick "astal-notifd -c ${notif.id}"
+        (box
+          :width 20
+          :height 20
+          :halign "end"
+          "󰅖"
+        )
+      )
+    )
+  )
+)
+
+(defwidget notifcations []
+  (box
+    :orientation "v"
+    :class  "notif_panel"
+    :width  400
+    :space-evenly false
+    :spacing 20
+    (scroll
+      :vscroll true
+      :width  400
+      :height 300
+      (box
+        :orientation    "v"
+        :space-evenly  false
+        (box
+          :orientation "v"
+          :spacing 10
+          :valign "start"
+          (for notif in notifications
+            (notif
+              :notif notif
+            )
+          )
+        )
+        (box
+          :style {jq(notifications, "length") == 0 ? "padding: 10px;" : ""}
+          {jq(notifications, "length") == 0 ? "No notifications" : ""}
+        )
+      )
+    )
+    (button
+      :halign "end"
+      :class "notif_clear"
+      :onclick "gjs -m scripts/clear_notifs.js"
+      :style {jq(notifications, "length") == 0 ? "opacity: 0" : ""}
+      {jq(notifications, "length") == 0 ? "" : "Clear All"}
+    )
+  )
+)
+
+(deflisten notifications
+  :initial    "[]"
+  `gjs -m ./scripts/notifications_list.js`
+)

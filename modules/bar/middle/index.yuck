@@ -1,10 +1,16 @@
 (include	"./modules/bar/middle/taskbar.yuck")
+(include	"./modules/bar/middle/workspaces.yuck")
 
-(defwidget middle []
+(defwidget middle [monitor]
   (box
     :class			  "middle"
     :orientation	"h"
     :halign			  "start"
     :valign			  "center"
+    :space-evenly false
+    :spacing 5
     (taskbar)
+    (workspaces
+      :monitor monitor
+    )
   ))

@@ -1,4 +1,4 @@
-(defwidget np []
+(defwidget np [monitor]
   (box
     :space-evenly	false
     :spacing		10
@@ -22,13 +22,14 @@
         (box
           :halign "center"
           :style `font-size: 14px;`
+          :class "cpu-icon"
           {play_status != "Playing" ? "󰐊" : "󰏤"}
           
         )
       )
     )
     (button
-      :onclick  "./scripts/toggleAudio.sh"
+      :onclick  `./scripts/toggleAudio.sh ${monitor}`
       (label
         :text
         `${artist} - ${title}`
@@ -43,11 +44,11 @@
   `playerctl --follow status`
 )
 
-(deflisten artist :initial ""
+(deflisten artist :initial "No Artist"
   `playerctl metadata --format "{{artist}}" --follow`
 )
 
-(deflisten title :initial ""
+(deflisten title :initial "No Title (pun intended)"
   `playerctl metadata --format "{{title}}" --follow`
 )
 

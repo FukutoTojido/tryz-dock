@@ -1,7 +1,5 @@
 (defwidget playing []
-  (revealer
-    :reveal         open_audio
-    :transition     "slidedown"
+  (box
     :class          "playing"
     (box
       :vexpand        false
@@ -15,53 +13,41 @@
       )
       (box
         :orientation    "v"
-        :space-evenly   false
-        :valign     "center"
         :spacing  20
         :class  "metadata"
         (box
           :width     300
-          :valign     "center"
+          :valign     "start"
           :orientation    "v"
-          (label
-            :class  "artist"
-            :text   {artist}
-            :limit-width    30
-          )
           (label
             :class  "title"
             :text   {title}
+            :xalign 0
             :limit-width    50
+          )
+          (label
+            :class  "artist"
+            :text   {artist}
+            :xalign 0
+            :limit-width    30
           )
         )
         (box
           :class      "progress"
-          :orientation "v"
-          :space-evenly false
           :spacing    20
-          (scale
-            :min        0
-            :max        101
-            :orientation    "h"
-            :value      {playPercent}
-          )
+          :width     300
+          :valign "end"
+          :space-evenly false
           (box
-            :halign "center"
-            :spacing  20
+            :halign "start"
+            :spacing  30
+            :style "padding: 0 10px;"
             (button
               :onclick `playerctl previous`
               (box
                 :halign "center"
                 :style `font-size: 24px;`
                 "󰒮"
-              )
-            )
-            (button
-              :onclick `playerctl play-pause`
-              (box
-                :halign "center"
-                :style `font-size: 24px;`
-                {play_status != "Playing" ? "󰐊" : "󰏤"}
               )
             )
             (button
@@ -73,6 +59,44 @@
               )
             )
           )
+          (box
+            :space-evenly false
+            :halign "end"
+            :spacing 20
+            :hexpand true
+            (box
+              (label
+                :text {formattime(round(currentPos, 0), "%M:%S")}
+              )
+              "/"
+              (label
+                :text {formattime(round(fullLength / 1000000, 0), "%M:%S")}
+              )
+            )
+            (button
+              :onclick `playerctl play-pause`
+              (circular-progress
+                :class 		"bat"
+                :width 		40
+                :height 	40
+                :thickness	4
+                :value 		{playPercent}
+                :start-at	75
+                :clockwise	true
+                :style		`
+                font-size: 10px;
+                `
+                :valign		"center"
+                (box
+                  :halign "center"
+                  :style `font-size: 20px;`
+                  {play_status != "Playing" ? "󰐊" : "󰏤"}
+                  
+                )
+              )
+            )
+          )
+          
         )
       )
     )
@@ -81,7 +105,7 @@
 
 (defwindow playing [monitor]
   :monitor monitor
-  :windowtype "dialog"
+  :windowtype "normal"
   :wm-ignore  true
   :geometry (
     geometry
@@ -96,6 +120,16 @@
   :interval	"1s"
   :initial    "/home/try-z/.face"
   `./scripts/audio_art.sh`
+)
+
+(deflisten fullLength :initial 0
+  `playerctl metadata --format "{{mpris:length}}" --follow`
+)
+
+(defpoll currentPos
+  :interval	"1s"
+  :initial    0
+  `playerctl position`
 )
 
 (defvar open_audio false)

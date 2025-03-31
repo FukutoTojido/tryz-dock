@@ -1,0 +1,103 @@
+.panel {
+    border-radius: 20px;
+    border: solid 1px #585b70;
+    background-color: #1e1e2e;
+    padding: 1px;
+}
+
+.quick {
+    padding: 20px;
+}
+
+.quick_button {
+    border-radius: 20px;
+    color: #cdd6f4;
+    font-size: 18px;
+    font-family: "JetBrainsMono Nerd Font Propo";
+}
+
+.quick_button:hover {
+    background-color: #313244;
+}
+
+.quick_time {
+    font-size: 20px;
+    // font-weight: bold;
+    color: #cdd6f4;
+}
+
+.quick_date {
+    font-size: 12px;
+    // font-weight: bolder;
+    color: #cdd6f4;
+}
+
+.quick_set {
+    background-color: #cdd6f4;
+    border-radius: 50px;
+    color: #1e1e2e;
+    font-family: "JetBrainsMono Nerd Font Propo";
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+.notif_panel {
+    padding: 20px;
+    background-color: #181825;
+    border-radius: 20px;
+}
+
+.notif {
+    background-color: #1e1e2e;
+    border-radius: 15px;
+}
+
+.notif_content {
+    padding: 20px 0px 20px 20px;
+}
+
+// .notif_content:hover {
+//     background-color: #313244;
+// }
+
+.notif_icon {
+    border-radius: 20px;
+    background-color: #313244;
+    background-size: cover;
+    background-position: center;
+    padding: 5px;
+}
+
+.notif_name {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.notif_summary {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.notif_close_col {
+    padding: 20px 20px 20px 0;
+}
+
+.notif_close {
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.notif_close:hover {
+    background-color: #313244;
+}
+
+.notif_clear {
+    background-color: #313244;
+    padding: 10px 15px;
+    border-radius: 30px;
+}
+
+.notif_clear:hover {
+    background-color: #45475a;
+}

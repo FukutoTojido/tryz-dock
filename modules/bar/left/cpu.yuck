@@ -18,6 +18,7 @@
       `
       :valign		"center"
       (box
+        :class "cpu_icon"
         :style `font-size: 14px`
         ""
       )

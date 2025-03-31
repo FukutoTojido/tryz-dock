@@ -3,7 +3,7 @@
 (include    "./modules/bar/left/ram.yuck")
 (include    "./modules/bar/left/np.yuck")
 
-(defwidget left []
+(defwidget left [monitor]
   (box
     :space-evenly true
     :valign       "center"
@@ -17,9 +17,23 @@
       :valign   "center"
       :spacing  5
       :space-evenly false
+      (label
+        :limit-width 0
+        :halign "center"
+        :style "color: transparent;"
+        :text "${window_order}"
+      )
       (cpu)
       (ram)
-      (np)
+      (np
+        :monitor monitor
+      )
     )
   )
+)
+
+
+(deflisten window_order
+  :initial  '[]'
+  `/home/try-z/.config/eww/scripts/switchWin.py`
 )
