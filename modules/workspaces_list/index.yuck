@@ -9,7 +9,8 @@
     (for workspace in all_workspaces
       (button
         :onclick `
-        bspc desktop --focus ${workspace} && eww close workspaces_list
+        bspc desktop --focus ${workspace}
+        eww close workspaces_list
         `
         :class "win"
         :valign	"center"
