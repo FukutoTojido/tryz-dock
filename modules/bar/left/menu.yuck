@@ -9,21 +9,13 @@
       :halign "start"
       :class  "applicationName"
       :limit-width  40
-      :text {activeName.application}
+      :text {arraylength(window_order) != 0 ? window_order[0].class : "desktop"}
     )
     (label
       :halign "start"
       :class  "windowTitle"
       :limit-width  40
-      :text {activeName.name}
+      :text {arraylength(window_order) != 0 ? window_order[0].name : "welcome home"}
     )
   )
-)
-
-(deflisten 	activeName
-  :initial 	`{
-  "name": "",
-  "application": ""
-  }`
-  `/home/try-z/.config/eww/scripts/activeName.py`
 )

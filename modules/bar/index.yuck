@@ -1,5 +1,5 @@
-(include    "./modules/bar/left/index.yuck")
 (include    "./modules/bar/middle/index.yuck")
+(include    "./modules/bar/left/index.yuck")
 (include    "./modules/bar/right/index.yuck")
 
 (defwidget bar [monitor]

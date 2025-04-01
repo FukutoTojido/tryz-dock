@@ -13,7 +13,7 @@
           :onclick `
           /home/try-z/.config/eww/scripts/toggleWindow.sh ${win.pid}
           `
-          :class	{win.pid == activeName.xid ? "win active" : "win"}
+          :class	{ win.pid == (arraylength(window_order) != 0 ? window_order[0].pid : -1) ? "win active" : "win"}
           :valign	"center"
           :halign	"center"
           (box
@@ -26,5 +26,5 @@
 
 (deflisten 	allWin
   :initial 	`[]`
-  `/home/try-z/.config/eww/scripts/testWin.py`
+  `/home/try-z/.config/eww/scripts/all_win.py`
 )
