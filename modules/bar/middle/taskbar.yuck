@@ -6,7 +6,7 @@
     :spacing		5
     :height     40
     :vexpand		false
-    (for win in window_order
+    (for win in `${jq(window_order, "sort_by(.time)")}`
       (eventbox
         :tooltip	"${win.name}"
         (button

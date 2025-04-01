@@ -3,6 +3,7 @@
 import json
 import gi
 import os
+import time
 gi.require_version('Gtk', '3.0')
 gi.require_version('Wnck', '3.0')
 
@@ -12,6 +13,7 @@ from gi.repository import Gtk
 root_win = None
 excludedApps = ['spacefm', 'panel', 'eww-bar', 'eww-user', 'eww-timeWidget', 'eww']
 windows = {}
+stack_count = 0
 
 class Node:
     def __init__(self, data):
@@ -87,12 +89,16 @@ def on_window_create(screen, window):
     icon_path = f"""/tmp/{pid}.png"""
     window.get_icon().savev(icon_path, "png")
 
+    global stack_count
+    stack_count = stack_count + 1
+
     current_win = Node({
         "icon": icon_path,
         "pid": window.get_xid(),
         "name": window.get_name(),
         "class": window.get_class_instance_name(),
-        "workspace": window.get_workspace().get_number()
+        "workspace": window.get_workspace().get_number(),
+        "time": stack_count
     })
 
     current_win.next = root_win
@@ -147,12 +153,16 @@ def get_windows_list(screen):
         icon_path = f"""/tmp/{pid}.png"""
         x.get_icon().savev(icon_path, "png")
 
+        global stack_count
+        stack_count = stack_count + 1
+
         current_win = Node({
             "icon": icon_path,
             "pid": x.get_xid(),
             "name": x.get_name(),
             "class": x.get_class_instance_name(),
-            "workspace": x.get_workspace().get_number()
+            "workspace": x.get_workspace().get_number(),
+            "time": int(time.time())
         })
 
         if root_win is None:
