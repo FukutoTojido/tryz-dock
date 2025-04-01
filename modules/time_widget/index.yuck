@@ -1,0 +1,40 @@
+(defwidget  time_widget    []
+  (box
+    :class          "timeWidget"
+    :orientation    "v"
+    :space-evenly   "false"
+    :width 400
+    ; :style          `
+    ; background-image: url("${wallpaperPath}");
+    ; `
+    :spacing        10
+    (label
+      :halign "center"
+      :class  "homeDate"
+    :text   {date})
+    (box
+      :halign         "center"
+      :class          "homeTime"
+      :space-evenly   false
+      :spacing        0
+      (label
+        :class  "hour"
+      :text   {hour})
+      (label
+        :class  "hour"
+      :text   ":")
+      (label
+        :class  "minute"
+        :valign "end"
+      :text   {minute}))
+  ))
+
+(defwindow  time_widget
+  :monitor    '["DP-0", "eDP-1-0", "eDP-1-1"]'
+  :stacking   "bg"
+  :windowtype "desktop"
+  :geometry   (geometry   :x      "120px"
+    :y      "-100px"
+  :anchor "center left")
+  :wm-ignore  false
+  (time_widget))

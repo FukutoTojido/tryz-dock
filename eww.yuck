@@ -1,6 +1,5 @@
-(include	"./variables.yuck")
 (include	"./modules/calendar/index.yuck")
-(include	"./modules/home/index.yuck")
+(include	"./modules/time_widget/index.yuck")
 (include	"./modules/bar/index.yuck")
 (include	"./modules/playing/index.yuck")
 (include	"./modules/flash_notif/index.yuck")
