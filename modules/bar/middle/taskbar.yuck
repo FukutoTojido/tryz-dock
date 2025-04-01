@@ -16,10 +16,21 @@
           :class	{ win.pid == (arraylength(window_order) != 0 ? window_order[0].pid : -1) ? "win active" : "win"}
           :valign	"center"
           :halign	"center"
-          (box
-            :space-evenly	false
-            (image
-              :path				"${win.icon}"
-              :image-width		20
-            :image-height		20)
+          (overlay
+            (box
+              :space-evenly	false
+              (image
+                :path				"${win.icon}"
+                :image-width		20
+                :image-height		20
+              )
+            )
+            (transform
+              :translate-x "35%"
+              :translate-y "35%"
+              (label
+                :class "workspace_icon"
+                :text `${win.workspace}`
+              )
+            )
           ))))))

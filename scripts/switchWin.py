@@ -23,6 +23,15 @@ def print_res():
     global root_win
     print(json.dumps(list(map(lambda x: x[1].data | { "idx": x[0] }, enumerate(serialize_linked_list(root_win))))))
 
+def on_workspace_change(window):
+    xid = window.get_xid()
+    workspace = window.get_workspace().get_number()
+
+    global windows
+    windows[xid].data["workspace"] = workspace
+
+    print_res() 
+
 def on_name_change(window):
     xid = window.get_xid()
     name = window.get_name()
@@ -82,7 +91,8 @@ def on_window_create(screen, window):
         "icon": icon_path,
         "pid": window.get_xid(),
         "name": window.get_name(),
-        "class": window.get_class_instance_name()
+        "class": window.get_class_instance_name(),
+        "workspace": window.get_workspace().get_number()
     })
 
     current_win.next = root_win
@@ -95,6 +105,7 @@ def on_window_create(screen, window):
     windows[current_win.data["pid"]] = current_win
     window.connect("name-changed", on_name_change)
     window.connect("icon-changed", on_icon_change)
+    window.connect("workspace-changed", on_workspace_change)
 
     # print(list(map(lambda x: x.data["class"], serialize_linked_list(root_win))))
     print_res()
@@ -140,7 +151,8 @@ def get_windows_list(screen):
             "icon": icon_path,
             "pid": x.get_xid(),
             "name": x.get_name(),
-            "class": x.get_class_instance_name()
+            "class": x.get_class_instance_name(),
+            "workspace": x.get_workspace().get_number()
         })
 
         if root_win is None:
@@ -156,6 +168,7 @@ def get_windows_list(screen):
         windows[current_win.data["pid"]] = current_win
         x.connect("name-changed", on_name_change)
         x.connect("icon-changed", on_icon_change)
+        x.connect("workspace-changed", on_workspace_change)
 
 def serialize_linked_list(root):
     windows = []
