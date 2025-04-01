@@ -2,7 +2,6 @@
     all: unset; //Unsets everything so you can style everything from scratch
     transition: ease-in-out 100ms;
 
-    font-family: Rubik, Meiryo UI, "JetBrainsMono Nerd Font Propo";
 }
 
 @import "modules/calendar/style.scss";

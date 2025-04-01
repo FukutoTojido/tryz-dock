@@ -23,7 +23,8 @@
 (defwindow bar [monitor]
   :monitor monitor
   :windowtype "dock"
-  ; :wm-ignore true
+  :stacking   "bg"
+  :wm-ignore  false
   :geometry (geometry :x "0px"
     :y "0px"
     :width "1920px"

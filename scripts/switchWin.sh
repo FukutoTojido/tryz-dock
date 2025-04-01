@@ -2,10 +2,6 @@
 
 case "$1" in
     "reverse")
-        if [[ ! -n $(eww active-windows | grep "window_switcher") ]]; then
-            eww open window_switcher
-        fi
-
         LIST_LENGTH=$(eww get window_order | jq length)
         INDEX=$((($(eww get index) - 1) % $LIST_LENGTH))
 
@@ -18,18 +14,22 @@ case "$1" in
             eww update index=$INDEX
             eww update selected_pid=$PID
         fi
-        echo $INDEX
-        ;;
-    "switch")
+
         if [[ ! -n $(eww active-windows | grep "window_switcher") ]]; then
             eww open window_switcher
         fi
-
+        echo $INDEX     
+        ;;
+    "switch")
         LIST_LENGTH=$(eww get window_order | jq length)
         INDEX=$((($(eww get index) + 1) % $LIST_LENGTH))
         PID=$(eww get window_order | jq ".[$INDEX].pid")
         eww update index=$INDEX
         eww update selected_pid=$PID
+
+        if [[ ! -n $(eww active-windows | grep "window_switcher") ]]; then
+            eww open window_switcher
+        fi
         echo $INDEX
         ;;
     "confirm")

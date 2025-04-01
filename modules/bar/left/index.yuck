@@ -23,6 +23,18 @@
         :style "color: transparent;"
         :text "${window_order}"
       )
+      (label
+        :limit-width 0
+        :halign "center"
+        :style "color: transparent;"
+        :text "${index}"
+      )
+      (label
+        :limit-width 0
+        :halign "center"
+        :style "color: transparent;"
+        :text "${selected_pid}"
+      )
       (cpu)
       (ram)
       (np
@@ -37,3 +49,7 @@
   :initial  '[]'
   `/home/try-z/.config/eww/scripts/switchWin.py`
 )
+
+(defvar index 0)
+
+(defvar selected_pid -1)
