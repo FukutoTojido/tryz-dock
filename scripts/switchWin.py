@@ -10,6 +10,7 @@ from gi.repository import Gtk
 
 root_win = None
 excludedApps = ['polydock', 'polybar', 'spacefm', 'panel', 'eww-bar', 'eww-user', 'eww-timeWidget', 'eww']
+windows = {}
 
 class Node:
     def __init__(self, data):
@@ -20,6 +21,15 @@ class Node:
 def print_res():
     global root_win
     print(json.dumps(list(map(lambda x: x[1].data | { "idx": x[0] }, enumerate(serialize_linked_list(root_win))))))
+
+def on_name_change(window):
+    xid = window.get_xid()
+    name = window.get_name()
+
+    global windows
+    windows[xid].data["name"] = name
+
+    print_res() 
 
 def on_active_window_changed(screen, _):
     window = screen.get_active_window()
@@ -70,6 +80,10 @@ def on_window_create(screen, window):
     if root_win is not None:
         root_win.prev = current_win
     root_win = current_win
+    
+    global windows
+    windows[current_win.data["pid"]] = current_win
+    window.connect("name-changed", on_name_change)
 
     # print(list(map(lambda x: x.data["class"], serialize_linked_list(root_win))))
     print_res()
@@ -91,6 +105,9 @@ def on_window_destroy(screen, window):
 
     current_win.prev.next = current_win.next
     current_win.next.prev = current_win.prev   
+
+    global windows
+    windows.pop(current_win.data["pid"], None)
 
     # print(list(map(lambda x: x.data["class"], serialize_linked_list(root_win))))
     print_res()
@@ -120,6 +137,10 @@ def get_windows_list(screen):
             current_win.prev = last_win
 
         last_win = current_win
+        
+        global windows
+        windows[current_win.data["pid"]] = current_win
+        x.connect("name-changed", on_name_change)
 
 def serialize_linked_list(root):
     windows = []

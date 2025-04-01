@@ -21,7 +21,7 @@
           (label
             :valign "center"
             :limit-width 30
-            :text `${win.class}`
+            :text `${win.name}`
           )
         )
       )
