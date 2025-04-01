@@ -6,7 +6,7 @@
     :spacing		5
     :height     40
     :vexpand		false
-    (for win in allWin
+    (for win in window_order
       (eventbox
         :tooltip	"${win.name}"
         (button
@@ -23,8 +23,3 @@
               :image-width		20
             :image-height		20)
           ))))))
-
-(deflisten 	allWin
-  :initial 	`[]`
-  `/home/try-z/.config/eww/scripts/all_win.py`
-)

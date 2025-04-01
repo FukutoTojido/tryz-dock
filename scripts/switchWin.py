@@ -2,6 +2,7 @@
 
 import json
 import gi
+import os
 gi.require_version('Gtk', '3.0')
 gi.require_version('Wnck', '3.0')
 
@@ -28,6 +29,16 @@ def on_name_change(window):
 
     global windows
     windows[xid].data["name"] = name
+
+    print_res() 
+
+def on_icon_change(window):
+    xid = window.get_xid()
+    icon_path = f"""/tmp/{xid}.png"""
+    window.get_icon().savev(icon_path, "png")
+        
+    global windows
+    windows[xid].data["icon"] = icon_path
 
     print_res() 
 
@@ -65,6 +76,7 @@ def on_window_create(screen, window):
 
     pid = window.get_xid()
     icon_path = f"""/tmp/{pid}.png"""
+    window.get_icon().savev(icon_path, "png")
 
     current_win = Node({
         "icon": icon_path,
@@ -82,6 +94,7 @@ def on_window_create(screen, window):
     global windows
     windows[current_win.data["pid"]] = current_win
     window.connect("name-changed", on_name_change)
+    window.connect("icon-changed", on_icon_change)
 
     # print(list(map(lambda x: x.data["class"], serialize_linked_list(root_win))))
     print_res()
@@ -107,6 +120,10 @@ def on_window_destroy(screen, window):
     global windows
     windows.pop(current_win.data["pid"], None)
 
+    pid = window.get_xid()
+    icon_path = f"""/tmp/{pid}.png"""
+    os.remove(icon_path)
+
     # print(list(map(lambda x: x.data["class"], serialize_linked_list(root_win))))
     print_res()
 
@@ -117,6 +134,7 @@ def get_windows_list(screen):
     for x in window_list:
         pid = x.get_xid()
         icon_path = f"""/tmp/{pid}.png"""
+        x.get_icon().savev(icon_path, "png")
 
         current_win = Node({
             "icon": icon_path,
@@ -137,6 +155,7 @@ def get_windows_list(screen):
         global windows
         windows[current_win.data["pid"]] = current_win
         x.connect("name-changed", on_name_change)
+        x.connect("icon-changed", on_icon_change)
 
 def serialize_linked_list(root):
     windows = []
