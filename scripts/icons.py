@@ -2,7 +2,6 @@
 
 import json
 import gi
-import os
 gi.require_version('Gtk', '3.0')
 gi.require_version('Wnck', '3.0')
 
@@ -13,15 +12,13 @@ excludedApps = ['polydock', 'polybar', 'spacefm', 'panel', 'eww-bar', 'eww-user'
 
 def on_window_destroy(screen, window):
     get_window_list(screen)
-    pid = window.get_xid()
-    icon_path = f"""/tmp/{pid}.png"""
-    os.remove(icon_path)
 
 def on_window_opened(screen, window):
     get_window_list(screen)
 
 def get_window_list(screen):
     window_list = screen.get_windows()
+    theme = Gtk.IconTheme.get_default()
 
     w = []
 
@@ -29,18 +26,24 @@ def get_window_list(screen):
         if not x.get_class_instance_name() or x.get_class_instance_name() in excludedApps:
             continue
 
+        # icon = "/home/try-z/.icons/placeholder.svg"
+        # if theme.lookup_icon(x.get_class_instance_name(), 48, 0):
+        #     icon = theme.lookup_icon(x.get_class_instance_name(), 48, 0).get_filename()
+
         pid = x.get_xid()
         icon_path = f"""/tmp/{pid}.png"""
-        x.get_icon().savev(icon_path, "png")
+        x.get_mini_icon().savev(icon_path, "png")
 
-        w.append(json.dumps({
-            "icon": icon_path,
-            "pid": pid,
-            "name": x.get_name(),
-            "class": x.get_class_instance_name()
-        }))
+        print(f"""{icon_path}""")
 
-    print(f"""[{",".join(w)}]""")
+        # w.append(json.dumps({
+        #     "icon": icon,
+        #     "pid": x.get_xid(),
+        #     "name": x.get_name(),
+        #     "class": x.get_class_instance_name()
+        # }))
+
+    # print(f"""[{",".join(w)}]""")
 
 def main():
     while Gtk.events_pending():
@@ -58,4 +61,3 @@ def main():
     loop.run()
 
 main()
-    

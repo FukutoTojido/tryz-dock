@@ -9,7 +9,7 @@ from gi.repository import Wnck, Gdk, GLib
 from gi.repository import Gtk
 
 root_win = None
-excludedApps = ['polydock', 'polybar', 'spacefm', 'panel', 'eww-bar', 'eww-user', 'eww-timeWidget', 'eww']
+excludedApps = ['spacefm', 'panel', 'eww-bar', 'eww-user', 'eww-timeWidget', 'eww']
 windows = {}
 
 class Node:
@@ -62,14 +62,12 @@ def on_active_window_changed(screen, _):
 
 def on_window_create(screen, window):
     global root_win
-    theme = Gtk.IconTheme.get_default()
 
-    icon = "/home/try-z/.icons/placeholder.svg"
-    if theme.lookup_icon(window.get_class_instance_name(), 48, 0):
-        icon = theme.lookup_icon(window.get_class_instance_name(), 48, 0).get_filename()
+    pid = window.get_xid()
+    icon_path = f"""/tmp/{pid}.png"""
 
     current_win = Node({
-        "icon": icon,
+        "icon": icon_path,
         "pid": window.get_xid(),
         "name": window.get_name(),
         "class": window.get_class_instance_name()
@@ -114,16 +112,14 @@ def on_window_destroy(screen, window):
 
 def get_windows_list(screen):
     window_list = screen.get_windows()
-    theme = Gtk.IconTheme.get_default()
 
     last_win = None
     for x in window_list:
-        icon = "/home/try-z/.icons/placeholder.svg"
-        if theme.lookup_icon(x.get_class_instance_name(), 48, 0):
-            icon = theme.lookup_icon(x.get_class_instance_name(), 48, 0).get_filename()
+        pid = x.get_xid()
+        icon_path = f"""/tmp/{pid}.png"""
 
         current_win = Node({
-            "icon": icon,
+            "icon": icon_path,
             "pid": x.get_xid(),
             "name": x.get_name(),
             "class": x.get_class_instance_name()
